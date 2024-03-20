@@ -5,8 +5,8 @@ function [J, lb, ub, zeta, u, u_analytic, switching, hamiltonian, kind] = qc_loa
 kind = extractBetween(filename,'norm', '_');
 kind = kind{:};
 
-data = num2cell(readmatrix(sprintf('../dat/data_%s.txt', filename), 'Delimiter', ' '), 1);
-meta = num2cell(readmatrix(sprintf('../dat/meta_%s.txt', filename), 'Delimiter', ' '), 1);
+data = num2cell(readmatrix(sprintf('../njp_aroqa/dat/data_%s.txt', filename), 'Delimiter', ' '), 1);
+meta = num2cell(readmatrix(sprintf('../njp_aroqa/dat/meta_%s.txt', filename), 'Delimiter', ' '), 1);
 
 [J, lb, ub, zeta] = deal(meta{:});
 

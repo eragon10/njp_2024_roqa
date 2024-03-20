@@ -40,7 +40,8 @@ for k = 1:size(E,2)
     for i = 1:size(u0, 2)
         [xT, J] = rollout(u0{i}, E{k}, opts{i});
         fidelity = abs(xT'*Bs{i});
-        Js{i} = [Js{i}, (J-Bv{i})];
+        %Js{i} = [Js{i}, (J-Bv{i})];
+        Js{i} = [Js{i}, J];
         Fs{i} = [Fs{i}, fidelity];
     end
 end

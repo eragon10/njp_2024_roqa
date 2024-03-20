@@ -17,9 +17,10 @@ end
 er = {};
 bb = 0.5;
 
-for i = 1:100
-   er{i} = min(bb, max(-bb, randn(20, 1)));
-end
+%for i = 1:2
+%   er{i} = min(bb, max(-bb, randn(20, 1)));
+%end
+
 %e = readmatrix('error.txt');
 %e = readmatrix('x3err.txt');
 %e = min(bb, max(-bb, sum([inputs{:}],2)/size(inputs,2)));

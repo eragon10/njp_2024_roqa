@@ -12,8 +12,8 @@ parm = 'x8params';
 all = [ "x8params_norm2_zeta2e-01";
         "x8params_normF_zeta1e-01";
         "x8params_normnone_zeta0e+00";
-        "x8params_normqaoa_zeta0e+00";
-        "x8params_norm2sh_zeta3e-01"];
+        "x8params_normqaoa_zeta0e+00"];
+%        "x8params_norm2sh_zeta3e-01"];
    
 inputs = {};
 kinds  = {};
@@ -31,13 +31,16 @@ Fm = [];
 
 
 errors = {};
- for i = 1:50
-    errors{i} = min(1, max(-1, randn(10, 1)));
- end
-    
+for i = 1:10
+   errors{i} = min(1, max(-1, randn(10, 1)));
+end
+
+%errors{i+1} = (-1).^(1:10).';
+%errors{i+2} = -1*(-1).^(1:4).';
+
 for bb = 0.1:0.1:1.0
     er = {};
-    for i = 1:50
+    for i = 1:size(bb,2)
         er{i} = bb*errors{i};
     end
     
@@ -55,12 +58,12 @@ for bb = 0.1:0.1:1.0
     Fm = [Fm; [sprintf('%f', bb), Fmins]];
 end
 
-writecell([names; Jm], sprintf('../dat/objmean_%s_full.csv', parm), 'Delimiter', ' ');
-writecell([names; Fm], sprintf('../dat/fidmini_%s_full.csv', parm), 'Delimiter', ' ');
+writecell([names; Jm], sprintf('../njp_aroqa/dat/objmean_%s_full.csv', parm), 'Delimiter', ' ');
+writecell([names; Fm], sprintf('../njp_aroqa/dat/fidmini_%s_full.csv', parm), 'Delimiter', ' ');
 
 function [list] = find_config(paramname)
     list = [];
-    fl = dir('../dat');
+    fl = dir('../njp_aroqa/dat');
     for i = 1:size(fl)
         if and(contains(fl(i).name, paramname), contains(fl(i).name, 'data'))
            list = [list; string(sprintf('%s', fl(i).name(6:end-4)))]; 

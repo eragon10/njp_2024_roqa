@@ -5,14 +5,14 @@ parm = 'x8params';
 [B,C,F,x0] = eval(sprintf('%s()', parm));
 
 %all = find_config(parm);
-%all = ["x8params_norm2_zeta2e-01";
-%       "x8params_normF_zeta1e-01";
-%       "x8params_norm2sh_zeta3e-01"];
+all = ["x8params_norm2_zeta2e-01";
+       "x8params_normF_zeta1e-01";
+       "x8params_normnone_zeta0e+00";
+       "x8params_normqaoa_zeta0e+00";
+       "x8params_norm2sh_zeta3e-01"];
 
-all = [ "x8params_norm2_zeta2e-01";
-        "x8params_normF_zeta1e-01";
-        "x8params_normnone_zeta0e+00";
-        "x8params_normqaoa_zeta0e+00"];
+%all = [ "x6params_1_normnone_zeta3e-01";
+%        "x6params_1_norm2_zeta3e-01"];
 %        "x8params_norm2sh_zeta3e-01"];
    
 inputs = {};
@@ -30,22 +30,21 @@ Jm = [];
 Fm = [];
 
 
-errors = {};
-for i = 1:10
-   errors{i} = min(1, max(-1, randn(10, 1)));
-end
-
-%errors{i+1} = (-1).^(1:10).';
-%errors{i+2} = -1*(-1).^(1:4).';
+errors = {}; i = 0;
+%for i = 1:6
+%   errors{i} = min(1, max(-1, randn(10, 1)));
+%end
+errors{i+1} = (-1).^(1:10)';
+errors{i+1} = -1*(-1).^(1:10)';
 
 for bb = 0.1:0.1:1.0
     er = {};
-    for i = 1:size(bb,2)
+    for i = 1:size(errors,2)
         er{i} = bb*errors{i};
     end
     
     [Js, Fs, Bv] = qc_samples(C, F, x0, inputs, kinds, ...
-       'Error', er, 'MaxStep', 3e-2);
+       'Error', er, 'MaxStep', 1e-1);
    
     Jmeans = {};
     Fmins  = {};

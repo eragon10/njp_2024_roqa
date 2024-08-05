@@ -34,7 +34,7 @@ for i = 1:(n+2*o)
     
 end
 
-writematrix([q, v, sl, su], sprintf('../dat/plot_%s_norm%s.txt', parm, kind), 'Delimiter', ' ');
+%writematrix([q, v, sl, su], sprintf('../dat/plot_%s_norm%s.txt', parm, kind), 'Delimiter', ' ');
 
 
 plot(q, v, q, sl, q, su) %, q, v1, q, s1);

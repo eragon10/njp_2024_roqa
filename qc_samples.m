@@ -3,7 +3,7 @@ function [Js, Fs, Bv] = qc_samples(C, F, x0, u0, opts, varargin)
 T = 1;
 E = { 0.1, -0.1 };
 
- maxstep = 1e-2;
+maxstep = 1e-2;
 
 while ~isempty(varargin)
     switch lower(varargin{1})
@@ -22,7 +22,7 @@ end
 
 assert(size(u0, 2) == size(opts, 2), 'Should be the same size');
 
-cfg = odeset('RelTol',1e-6,'AbsTol',1e-10, 'MaxStep', maxstep);
+cfg = odeset('RelTol', 1e-4, 'AbsTol', 1e-8, 'MaxStep', maxstep);
         
 Js = cell(size(u0,2),1);
 Fs = cell(size(u0,2),1);

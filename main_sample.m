@@ -37,7 +37,7 @@ end
 
 function [list] = find_config(paramname)
     list = [];
-    fl = dir('../dat');
+    fl = dir('../njp_aroqa/dat');
     for i = 1:size(fl)
         if and(contains(fl(i).name, paramname), contains(fl(i).name, 'data'))
            list = [list; string(sprintf('%s', fl(i).name(6:end-4)))]; 

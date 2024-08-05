@@ -1,12 +1,23 @@
 
 
-function [J, lb, ub, zeta, u, u_analytic, switching, hamiltonian, kind] = qc_load(filename)
+function [J, lb, ub, zeta, u, u_analytic, switching, hamiltonian, kind] = qc_load(filename, varargin)
+
+root = '../njp_aroqa/dat';  
+while ~isempty(varargin)
+    switch lower(varargin{1})
+        case 'path'
+            root = varargin{2};
+        otherwise
+            error(['Unexpected option: ' varargin{1}])
+    end
+    varargin(1:2) = [];
+end
 
 kind = extractBetween(filename,'norm', '_');
 kind = kind{:};
 
-data = num2cell(readmatrix(sprintf('../njp_aroqa/dat/data_%s.txt', filename), 'Delimiter', ' '), 1);
-meta = num2cell(readmatrix(sprintf('../njp_aroqa/dat/meta_%s.txt', filename), 'Delimiter', ' '), 1);
+data = num2cell(readmatrix(sprintf('%s/data_%s.txt', root, filename), 'Delimiter', ' '), 1);
+meta = num2cell(readmatrix(sprintf('%s/meta_%s.txt', root, filename), 'Delimiter', ' '), 1);
 
 [J, lb, ub, zeta] = deal(meta{:});
 

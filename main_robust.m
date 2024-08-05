@@ -4,8 +4,8 @@ n = 200;
 m = 20;
 
 zeta = 0.3;
-kind = '2sh';
-parm = 'x8params';
+kind = 'none';
+parm = 'x6params_1';
 
 %[B,C,F,x0] = x3params_extreme();
 [B,C,F,x0] = eval(sprintf('%s()', parm));
@@ -19,16 +19,16 @@ fprintf('Absence bound for bang-bang: %s\n', zeta_bound);
 
 %u0 = 0.5*ones(n,1);
 %u0 = 1/m*ones(m,1);
-dd = num2cell(readmatrix(sprintf('../dat/data_%s_norm%s_zeta%.0e.txt', parm, kind, zeta), 'Delimiter', ' '),1);
+dd = num2cell(readmatrix(sprintf('../njp_aroqa/dat/data_%s_norm%s_zeta%.0e.txt', parm, kind, zeta), 'Delimiter', ' '),1);
 [u0,~,~,~] = deal(dd{:});
 
 u = u0;
-%[u, ~, xe] = qc_optimize(C, F, u0, x0, kind, 'Zeta', zeta, 'Iterations', 300, 'Gamma', 0.8, 'Alpha', 0.8);
+[u, ~, xe] = qc_optimize(C, F, u0, x0, kind, 'Zeta', zeta, 'Iterations', 300, 'Gamma', 2.2, 'Alpha', 0.9);
 
 [J, hamiltonian, u_analytic, switching, lb, ub] = ...
     qc_analyse(u, C, F, x0, zeta, kind);
 
-%qc_save(parm, kind, J, lb, ub, zeta, u, u_analytic, switching, hamiltonian);
+qc_save(parm, kind, J, lb, ub, zeta, u, u_analytic, switching, hamiltonian);
 %writematrix([J, lb, ub, zeta], ...
 %    sprintf('../dat/meta_%s_norm%s_zeta%.0e.txt', parm, kind, zeta), 'Delimiter', ' ');
 %writematrix([u, u_analytic.', switching.', hamiltonian.'], ...

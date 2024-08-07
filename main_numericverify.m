@@ -1,5 +1,5 @@
 
-x = 6; S = 250; N = 280; n = 100; zeta = 0.3;
+x = 6; S = 208; N = 208; n = 100; zeta = 0.3;
 
 errors = {};
 for i = 1:4
@@ -34,16 +34,17 @@ for i = S:N
         ident = sprintf('%s_norm%s_zeta%.0e', parm, kinds{k}, zeta);
         if exist(sprintf('dat/data_%s.txt', ident), 'file') == 2
             [~,~,~,~,u{k}, ~,~,~,~] = qc_load(ident, 'path', 'dat');
-        else
+        %else
+            u0 = u{k};
             switch kinds{k}
                 case {'none'}
                     [u{k}, ~, ~] = qc_optimize(C, F, u0, x0, kinds{k}, 'Zeta', zeta, ...
-                        'Iterations', 300, 'Gamma', 0.4, 'Alpha', 0.2);
-                    [u{k}, ~, ~] = qc_optimize(C, F, u{k}, x0, kinds{k}, 'Zeta', zeta, ...
-                        'Iterations', 700, 'Gamma', 0.8, 'Alpha', 0.6);
+                        'Iterations', 300, 'Gamma', 0.2, 'Alpha', 0.8);
+                    %[u{k}, ~, ~] = qc_optimize(C, F, u{k}, x0, kinds{k}, 'Zeta', zeta, ...
+                    %    'Iterations', 700, 'Gamma', 0.4, 'Alpha', 0.3);
                 case {'2', 'F', 'sqF', '2sh'}
                     [u{k}, ~, ~] = qc_optimize(C, F, u0, x0, kinds{k}, 'Zeta', zeta, ...
-                        'Iterations', 300, 'Gamma', 0.8, 'Alpha', 0.4);
+                        'Iterations', 300, 'Gamma', 0.2, 'Alpha', 0.8);
                 otherwise
                     error('Invalid norm type supplied');
             end

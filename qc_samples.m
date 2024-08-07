@@ -22,7 +22,7 @@ end
 
 assert(size(u0, 2) == size(opts, 2), 'Should be the same size');
 
-cfg = odeset('RelTol', 1e-4, 'AbsTol', 1e-8, 'MaxStep', maxstep);
+cfg = odeset('RelTol', 1e-6, 'AbsTol', 1e-10, 'MaxStep', maxstep);
         
 Js = cell(size(u0,2),1);
 Fs = cell(size(u0,2),1);

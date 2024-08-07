@@ -31,11 +31,15 @@ Fm = [];
 
 
 errors = {}; i = 0;
-%for i = 1:6
-%   errors{i} = min(1, max(-1, randn(10, 1)));
-%end
+for i = 1:8
+   errors{i} = min(1, max(-1, randn(10, 1)));
+end
 errors{i+1} = (-1).^(1:10)';
 errors{i+1} = -1*(-1).^(1:10)';
+errors{i+1} = 1*(-1).^(1:5)';
+errors{i+1} = -1*(-1).^(1:5)';
+errors{i+1} = 1*(-1).^(1:2)';
+errors{i+1} = -1*(-1).^(1:2)';
 
 for bb = 0.1:0.1:1.0
     er = {};
